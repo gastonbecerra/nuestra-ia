@@ -21,7 +21,7 @@ export default function Project() {
 
     <section id="origen"><h2>Origen</h2>
     <p>Este proyecto nació en las aulas de dos cursos. El primero fue sobre <em>Sociología de la IA</em> y era una experiencia de aprendizaje colaborativo internacional en línea (COIL) entre estudiantes del Programa de Sociología de Areandina de Colombia, de la carrera de Ciencias Políticas de la Universidad Antonio Ruiz de Montoya (UARM) de Perú, y de varias carreras de la Universidad de Flores (UFLO) de Argentina. El segundo era sobre <em>Filosofía de la IA</em> y era parte de la Diplomatura en Inteligencia Artificial de la Universidad de Flores (UFLO), en el que participaban graduados de diversas disciplinas y distintos lugares de residencia, aunque mayormente argentino. En ambos cursos, los estudiantes seleccionaron casos de adopción, desarrollo o uso de la IA en América Latina, que fueran relevantes para su campo disciplinar. Los casos relevados se convirtieron luego en el punto de partida para una segunda instancia de análisis o reflexión grupal.</p>
-    <p>A partir de estos primeros casos se desarrolló un dashboard interactivo para organizar, visualizar y explorar la casuística construida durante el COIL. Este desarrollo buscó transformar el conjunto de las experiencias relevadas en un corpus estructurado y consultable, al permitir visualizar y filtrar los casos según distintas dimensiones, y registrar para cada uno los principales actores involucrados, riesgos identificados y áreas de incidencia de la IA. La herramienta fue posteriormente adoptada por equipos de investigación de la Licenciatura en Sociología de UFLO para continuar su actualización y continuar el desarrollo.</p>
+    <p>A partir de estos primeros casos se desarrolló un dashboard interactivo para organizar, visualizar y explorar la casuística construida durante el COIL. Este desarrollo buscó transformar el conjunto de las experiencias relevadas en un corpus estructurado y consultable, al permitir visualizar y filtrar los casos según distintas dimensiones, y registrar para cada uno los principales actores involucrados, riesgos identificados y áreas de incidencia de la IA. La herramienta fue posteriormente adoptada por el equipo de investigación "IA en la cultura", dirigido por el Dr. Joaquín Mezzadra, radicado en la Licenciatura en Sociología de UFLO, para continuar su actualización y desarrollo.</p>
     </section>
 
     <section id="metodologia">
@@ -40,7 +40,7 @@ export default function Project() {
     </section>
 
     <section id="contacto"><h2>Contacto</h2>
-    <p>Para más información sobre el proyecto, puede contactar al equipo de investigación a la siguiente dirección: gaston.becerra@uflouniversidad.edu.ar.</p>
+    <p>Para más información sobre el proyecto, puede contactar a los investigadores joaquin.mezzadra@uflouniversidad.edu.ar y/o gaston.becerra@uflouniversidad.edu.ar.</p>
     </section>
 
 
