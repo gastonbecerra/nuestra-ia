@@ -1,0 +1,8 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "Nuestra IA: desarrollo", "type": "npm", "script": "dev", "problemMatcher": [], "isBackground": true },
+    { "label": "Nuestra IA: actualizar datos", "type": "npm", "script": "data:update", "problemMatcher": [] },
+    { "label": "Nuestra IA: comprobar build", "type": "npm", "script": "build", "group": "build", "problemMatcher": "$tsc" }
+  ]
+}
