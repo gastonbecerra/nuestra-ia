@@ -1,8 +1,8 @@
 export type Dimension = 'ambitos' | 'tecnologias' | 'herramientas' | 'actores' | 'riesgos' | 'promesas';
 export interface Territory { pais: string; provincia: string }
 export interface Case {
-  id: string; titulo: string; resumen: string; anio: string; fuente: string; autor: string; curso: string;
-  urls: string[]; territorios: Territory[]; pais_original: string; provincia_original: string; alcance: string;
+  id: string; titulo: string; resumen: string; anio: string; fuente: string;
+  urls: string[]; territorios: Territory[]; pais_original: string; provincia_original: string;
   ambitos: string[]; tecnologias: string[]; herramientas: string[]; actores: string[]; riesgos: string[];
   promesas: string[]; poblaciones: string[]; condiciones: string[]; implementacion: string[];
   tipo_fuente: string; comentarios: string; territorio_pendiente: boolean;
@@ -45,7 +45,7 @@ export function frequency(cases: Case[], dimension: Dimension) {
   for (const c of cases) for (const label of unique(c[dimension])) counts.set(label, (counts.get(label) || 0) + 1);
   return [...counts].map(([name, count]) => ({ name, count })).sort((a,b) => b.count-a.count || a.name.localeCompare(b.name, 'es'));
 }
-export interface Filters { q?: string; pais?: string; provincia?: string; anio?: string; ambito?: string; tecnologia?: string; herramienta?: string; actor?: string; riesgo?: string; promesa?: string; fuente?: string; alcance?: string }
+export interface Filters { q?: string; pais?: string; provincia?: string; anio?: string; ambito?: string; tecnologia?: string; herramienta?: string; actor?: string; riesgo?: string; promesa?: string; fuente?: string; localizacion?: string }
 export function filterCases(cases: Case[], f: Filters) {
   return cases.filter(c => (!f.q || fold(`${c.titulo} ${c.resumen} ${c.pais_original}`).includes(fold(f.q)))
     && (!f.pais || countries(c).includes(f.pais))
@@ -55,7 +55,9 @@ export function filterCases(cases: Case[], f: Filters) {
     && (!f.herramienta || c.herramientas.includes(f.herramienta))
     && (!f.actor || c.actores.includes(f.actor)) && (!f.riesgo || c.riesgos.includes(f.riesgo))
     && (!f.promesa || c.promesas.includes(f.promesa)) && (!f.fuente || c.fuente === f.fuente)
-    && (!f.alcance || (f.alcance === 'nacional' ? national(c, f.pais) : c.territorios.some(t => (!f.pais || t.pais === f.pais) && validProvince(t.provincia)))));
+    && (!f.localizacion || (f.localizacion === 'nacional' ? national(c, f.pais)
+      : f.localizacion === 'sin_territorio' ? !national(c, f.pais) && !c.territorios.some(t => (!f.pais || t.pais === f.pais) && validProvince(t.provincia))
+      : c.territorios.some(t => (!f.pais || t.pais === f.pais) && validProvince(t.provincia)))));
 }
 export function caseLink(filters: Filters) {
   return `/casos?${new URLSearchParams(Object.entries(filters).filter(([,v]) => !!v) as [string,string][]).toString()}`;

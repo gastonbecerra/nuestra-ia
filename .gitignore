@@ -10,10 +10,7 @@ dist/
 dist-pages/
 .env.local
 test-results/
-backups/
-playwright-report/
 .env
 .env.*
-!.env.example
 *.pending.json
 exports/

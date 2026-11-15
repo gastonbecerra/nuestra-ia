@@ -1,20 +1,17 @@
-# Una sola lectura produce el corpus, indicadores y cruces de la misma versión.
+# Lee Casuística y genera el paquete estático del dashboard. Nunca escribe en Sheets.
 source('scripts/R/comunes.R', encoding = 'UTF-8')
 source('scripts/R/territorios.R', encoding = 'UTF-8')
 destino <- 'public/data'
 dir.create(destino, recursive = TRUE, showWarnings = FALSE)
-local <- !is.null(archivo_datos())
-original <- if (local) leer_csv(archivo_datos()) else leer_sheet(crudo = TRUE)
-d <- validar(normalizar_base(original))
+d <- validar(normalizar_base(leer_sheet()))
 if (!nrow(d)) stop('La fuente está vacía; se conserva la versión anterior')
 campo <- function(i, n) if (n %in% names(d)) d[[n]][i] else ''
 registros <- lapply(seq_len(nrow(d)), function(i) {
   geo <- normalizar_territorios(d$caso_pais[i], campo(i, 'caso_provincia'))
   list(id = d$id_caso[i], titulo = d$titulo[i], resumen = campo(i, 'resumen_caso_100_palabras'),
-    anio = campo(i, 'caso_anio'), fuente = campo(i, 'fuente'), autor = campo(i, 'autor'),
-    curso = campo(i, 'curso'), urls = as.list(valores(d$url[i])), territorios = geo$territorios,
+    anio = campo(i, 'caso_anio'), fuente = campo(i, 'fuente'),
+    urls = as.list(valores(d$url[i])), territorios = geo$territorios,
     pais_original = d$caso_pais[i], provincia_original = campo(i, 'caso_provincia'),
-    alcance = campo(i, 'alcance_territorial'),
     ambitos = as.list(valores(campo(i, 'ambito_no_exc'))),
     tecnologias = as.list(valores(campo(i, 'tipo_herramienta_ia_no_exc'))),
     herramientas = as.list(valores(campo(i, 'nombre_herramienta_ia_no_exc'))),
@@ -47,25 +44,13 @@ for (pais in todos_paises) {
       porcentaje = round(100 * f$n_casos / length(subconjunto), 6))
 }
 fecha <- format(Sys.time(), tz = 'UTC', usetz = TRUE)
-requerir('digest')
 version <- substr(digest::digest(d, algo = 'sha256'), 1, 12)
-bundle <- list(version = version, generado_en = fecha, fuente = if (local) 'CSV curado' else 'Google Sheets',
+bundle <- list(version = version, generado_en = fecha, fuente = 'Google Sheets',
   casos = registros, indicadores = indicadores, cruces = cruces)
 temporal <- file.path(destino, 'corpus.pending.json')
 jsonlite::write_json(bundle, temporal, auto_unbox = TRUE, pretty = TRUE, null = 'null', digits = NA)
 verificado <- jsonlite::read_json(temporal, simplifyVector = FALSE)
 stopifnot(length(verificado$casos) == nrow(d), verificado$version == version)
-if (file.exists(file.path(destino, 'corpus.json')))
-  invisible(file.copy(file.path(destino, 'corpus.json'), file.path(salida, 'corpus_anterior.json'), overwrite = TRUE))
 if (!file.copy(temporal, file.path(destino, 'corpus.json'), overwrite = TRUE)) stop('No se pudo actualizar corpus.json')
 unlink(temporal)
-dir.create('data', showWarnings = FALSE)
-readr::write_excel_csv(original, 'data/casuistica.csv', na = '')
-if (length(cruces)) {
-  tabla <- do.call(rbind, lapply(cruces, as.data.frame))
-  tabla$version <- version
-  tabla$generado_en <- fecha
-  guardar(tabla, 'analisis_actualizado')
-  if (!local && !bandera('sin-escribir-sheet')) escribir_pestana(tabla, 'Análisis')
-}
 message('Versión ', version, ': ', nrow(d), ' casos. Datos locales listos en public/data/corpus.json')

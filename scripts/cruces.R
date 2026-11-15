@@ -2,7 +2,7 @@ source('scripts/R/comunes.R', encoding = 'UTF-8')
 d <- seleccionar(leer_datos())
 campos <- c(ambito = 'ambito_no_exc', riesgo = 'riesgos_no_exc',
   tecnologia = 'tipo_herramienta_ia_no_exc', actor = 'actores_institucionales_no_exc',
-  alcance = 'alcance_territorial', fuente = 'fuente')
+  fuente = 'fuente')
 vacia <- function() data.frame(cruce = character(), grupo = character(), categoria = character(),
   n_casos = integer(), denominador = integer(), casos_con_dato = integer(),
   porcentaje = numeric(), generado_en = character())
@@ -68,7 +68,3 @@ for (g in sort(unique(segmento))) {
 guardar(resultado, 'cruces')
 guardar(comparacion, 'comparacion_foco_arg_col_per')
 print(comparacion, row.names = FALSE)
-if (bandera('escribir-sheet')) {
-  if (!nrow(resultado)) stop('Sin datos para actualizar Análisis; se conserva la versión anterior')
-  escribir_pestana(resultado, 'Análisis')
-}

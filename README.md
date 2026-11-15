@@ -1,59 +1,65 @@
 # Nuestra IA
 
-Casuística regional de inteligencia artificial. Proyecto de la Licenciatura en
-Sociología UFLO: panorama descriptivo, comparación entre países y explorador de casos.
+Dashboard de la casuística regional de inteligencia artificial.
 
-- **Aplicación:** https://www.recursossociologicos.ar/nuestra-ia/
-- **Código:** https://github.com/gastonbecerra/nuestra-ia
-- **Base editorial:** [Google Sheets](https://docs.google.com/spreadsheets/d/16BfWHSFpgo00CUWoYjt3RzA1Q9PMp9lWHH2l7l_yV_8/edit), pestaña `Casuística`.
+- Aplicación: https://www.recursossociologicos.ar/nuestra-ia/
+- Repositorio: https://github.com/gastonbecerra/nuestra-ia
+- Fuente editorial: [Google Sheets, pestaña Casuística](https://docs.google.com/spreadsheets/d/16BfWHSFpgo00CUWoYjt3RzA1Q9PMp9lWHH2l7l_yV_8/edit)
 
-## Ejecutar en local
-
-Node.js 22.12+ o 24 y npm. Desde VS Code:
+## Desarrollo
 
 ```powershell
 npm ci
 npm run dev
 ```
 
-Abrir http://127.0.0.1:5173 (o el puerto informado). No hace falta R ni autenticación
-para navegar: se incluyen datos y cartografía locales.
+La aplicación usa el paquete local `public/data/corpus.json`; no consulta Google
+Sheets desde el navegador.
 
-## Editar datos y actualizar
+## Actualizar datos
 
-Editar **solo Google Sheets** y luego:
+La planilla es externa y de solo lectura para este proyecto. El pipeline no
+escribe ninguna pestaña de Google Sheets.
 
 ```powershell
 npm run data:update
-npm test
 ```
 
-R descarga una vez la base, valida los IDs, actualiza `data/casuistica.csv`, genera
-`public/data/corpus.json` y escribe los cruces en la pestaña `Análisis`.
-La actualización no publica automáticamente la web.
+El comando lee `Casuística`, valida los IDs, normaliza territorios y genera
+`public/data/corpus.json`. Los análisis opcionales se guardan en `outputs/`,
+una carpeta temporal ignorada por Git:
 
-## Comandos principales
+```powershell
+npm run data:stats
+npm run data:crosses
+```
 
-| Comando | Uso |
-| --- | --- |
-| `npm run dev` | Desarrollo con recarga automática |
-| `npm run data:update` | Sheets → datos y análisis de una misma versión |
-| `npm run data:local` | Regenerar desde `data/casuistica.csv`, sin Google |
-| `npm run data:stats` | Estadísticas descriptivas en `outputs/` |
-| `npm run data:crosses` | Cruces y comparación del foco Argentina/Colombia/Perú |
-| `npm test` | Integridad y coincidencia de cálculos R/TypeScript |
-| `npm run test:r` | Normalización territorial y copia editorial |
-| `npm run build` | Compilación local en `dist/` |
-| `npm run build:pages` | Compilación para `/nuestra-ia/` en `dist-pages/` |
-| `npm run preview:pages` | Probar el paquete que se publica |
-| `npm run export:pages -- --site=../sociologia-uflo` | Copiar el paquete al repositorio del sitio |
+La edición, incorporación y matching de registros se realiza fuera de este
+repositorio, directamente en Google Sheets.
 
-## Documentación para retomar
+## Compilar y publicar
 
-- **[ARQUITECTURA.md](ARQUITECTURA.md):** estructura, modelo de datos, reglas,
-  decisiones, flujo editorial y puntos de entrada para continuar el desarrollo.
-- **[docs/APLICACION.md](docs/APLICACION.md):** autenticación, comandos y publicación.
+```powershell
+npm run build
+npm run build:pages
+npm run export:pages -- --site=../sociologia-uflo
+```
 
-Stack: React 19, TypeScript, Vite, Tailwind 4, Recharts, Leaflet y R.
-El código fuente se respalda en `nuestra-ia`; el sitio Jekyll `sociologia-uflo`
-recibe únicamente el compilado en `nuestra-ia/`.
+`export:pages` copia el compilado al repositorio del sitio. Revisar el cambio,
+hacer commit y publicar desde `sociologia-uflo`.
+
+## Estructura mínima
+
+```text
+src/                    Dashboard React
+public/data/corpus.json Datos generados para la aplicación
+public/data/world.json  Cartografía local
+scripts/actualizar_datos.R
+scripts/estadisticas.R
+scripts/cruces.R
+scripts/R/              Utilidades del pipeline
+scripts/export-pages.mjs
+```
+
+No se versionan credenciales, datos intermedios, respaldos, resultados de
+análisis ni compilados.

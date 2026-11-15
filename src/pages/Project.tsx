@@ -27,10 +27,22 @@ export default function Project() {
     <section id="metodologia">
       <h2>Metodología</h2>
 
-      <h3>Unidad de análisis y criterio de inclusión</h3>
-      <p>Los casos refieren a experiencias e iniciativas de desarrollo o adopción de la IA, o a problemáticas y situaciones que se registraron en la región a partir de la incorporación de IA. La unidad es el caso documentado. Los casos pueden tener varias fuentes, como noticias o sitios web.</p>
-      <p>Además de los casos seleccionados por los estudiantes, se incluyeron otros casos documentados en el Atlas de la IA de Béliz (2025), así como otros casos relevantes que se identificaron en un corpus elaborado por el equipo de investigación.</p>
-      <p>La distribución refleja las procedencias e intereses de quienes participamos del relevamiento. No es representativa de toda la adopción de IA en América Latina. Las diferencias entre países no son tasas de implementación, riesgo o daño.</p>
+      <h3>Unidad de análisis</h3>
+      <p>Los casos refieren a experiencias e iniciativas de desarrollo, adopción o uso de inteligencia artificial, así como a problemáticas y situaciones concretas registradas en la región a partir de la incorporación de estas tecnologías. La unidad de análisis es el caso documentado. Un caso puede reunir varias fuentes, como noticias, documentos institucionales, artículos académicos o sitios web.</p>
+
+      <h3>Fuentes y orígenes de los datos</h3>
+
+      <p>El estado actual del proyecto reúne casos provenientes de distintas fuentes:</p>
+      <ul>
+        <li>Casos de adopción, uso o desarrollo seleccionados por estudiantes de los cursos que dieron origen al proyecto.</li>
+        <li>Casos de desarrollos y experiencias de inteligencia artificial documentados en el <em>Atlas de inteligencia artificial para el desarrollo humano de América Latina y el Caribe</em> de Beliz (2025).</li>
+        <li>Incidentes y peligros vinculados con sistemas de inteligencia artificial registrados durante 2026 por el <a href="https://oecd.ai/en/incidents" target="_blank" rel="noreferrer">AI Incidents and Hazards Monitor (AIM)</a> de la OECD (OECD, 2024).</li>
+      </ul>
+
+      <h3>Alcance y límites</h3>
+      <p>La distribución de los casos refleja las procedencias, decisiones e intereses de quienes participaron del relevamiento. Por eso, la base no constituye una muestra representativa de la adopción de inteligencia artificial en América Latina. Las diferencias entre países no deben interpretarse como tasas de implementación, riesgo o daño.</p>
+
+      <p>La ausencia de una provincia o unidad subnacional no implica que un caso sea nacional. Los casos se clasifican como nacionales únicamente cuando la base registra explícitamente <em>Nacional</em>; cuando la provincia está vacía, el territorio queda como no especificado.</p>
 
       <h3>Categorías y evidencia</h3>
       <p>Ámbitos, tecnologías, herramientas, actores, promesas y riesgos son etiquetas no excluyentes. Una etiqueta de riesgo no acredita un daño efectivamente ocurrido, del mismo modo que una etiqueta de promesa no constituye un logro acreditado.</p>

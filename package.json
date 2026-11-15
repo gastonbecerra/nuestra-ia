@@ -12,12 +12,8 @@
     "preview:pages": "vite preview --mode pages --outDir dist-pages --host 127.0.0.1",
     "export:pages": "npm run build:pages && node scripts/export-pages.mjs",
     "data:update": "node scripts/run-r.mjs",
-    "data:local": "node scripts/run-r.mjs --desde-local",
     "data:stats": "node scripts/run-r.mjs scripts/estadisticas.R",
-    "data:crosses": "node scripts/run-r.mjs scripts/cruces.R",
-    "test:r": "node scripts/run-r.mjs tests/data.R",
-    "test": "tsx --test tests/*.test.ts",
-    "test:e2e": "playwright test"
+    "data:crosses": "node scripts/run-r.mjs scripts/cruces.R"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
@@ -30,7 +26,6 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.65.0",
     "@tailwindcss/vite": "^4.1.14",
     "@types/geojson": "^7946.0.16",
     "@types/leaflet": "^1.9.21",
@@ -40,7 +35,6 @@
     "@types/topojson-client": "^3.1.5",
     "@vitejs/plugin-react": "^4.4.0",
     "tailwindcss": "^4.1.14",
-    "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }
