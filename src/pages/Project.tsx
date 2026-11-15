@@ -36,7 +36,7 @@ export default function Project() {
       <ul>
         <li>Casos de adopción, uso o desarrollo seleccionados por estudiantes de los cursos que dieron origen al proyecto.</li>
         <li>Casos de desarrollos y experiencias de inteligencia artificial documentados en el <em>Atlas de inteligencia artificial para el desarrollo humano de América Latina y el Caribe</em> de Beliz (2025).</li>
-        <li>Incidentes y peligros vinculados con sistemas de inteligencia artificial registrados durante 2026 por el <a href="https://oecd.ai/en/incidents" target="_blank" rel="noreferrer">AI Incidents and Hazards Monitor (AIM)</a> de la OECD (OECD, 2024).</li>
+        <li>Incidentes y peligros vinculados con sistemas de inteligencia artificial registrados durante 2026 por el <a href="https://oecd.ai/en/incidents" target="_blank" rel="noreferrer">AI Incidents and Hazards Monitor (AIM)</a> de la OECD.</li>
       </ul>
 
       <h3>Alcance y límites</h3>
